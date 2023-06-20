@@ -13,7 +13,7 @@ options(dplyr.summarise.inform = FALSE,
         piggyback.verbose = FALSE)
 
 #### DELETE AFTER TESTING ########
-GITHUB_PAT <- Sys.setenv("REPO_PAT")
+#GITHUB_PAT <- Sys.setenv("GITHUB_PAT")
 
  mfl_leagues <- mfl_getendpoint(mfl_connect(2022),"leagueSearch", user_agent="MFLRCLIENT", SEARCH="#SFB12") |>
    purrr::pluck("content","leagues","league") |>
