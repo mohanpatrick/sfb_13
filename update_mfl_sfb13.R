@@ -15,7 +15,7 @@ options(dplyr.summarise.inform = FALSE,
 #### DELETE AFTER TESTING ########
 #GITHUB_PAT <- Sys.setenv("GITHUB_PAT")
 
- mfl_leagues <- mfl_getendpoint(mfl_connect(2022),"leagueSearch", user_agent="MFLRCLIENT", SEARCH="#SFB12") |>
+ mfl_leagues <- mfl_getendpoint(mfl_connect(2023),"leagueSearch", user_agent="MFLRCLIENT", SEARCH="#SFB13") |>
    purrr::pluck("content","leagues","league") |>
    tibble::tibble() |>
    tidyr::unnest_wider(1) |>
@@ -31,15 +31,14 @@ get_mfl_draft <- function(league_id){
   cli::cli_alert("League ID: {league_id}")
   cli::cli_alert("Now we sleep to not piss off MFL")
   Sys.sleep(1)
-  conn <- mfl_connect(2022, league_id, user_agent = "MFLRCLIENT", rate_limit = TRUE, rate_limit_number = 30, rate_limit_seconds = 60)
+  conn <- mfl_connect(2023, league_id, user_agent = "MFLRCLIENT", rate_limit = TRUE, rate_limit_number = 30, rate_limit_seconds = 60)
   ff_draft(conn)
 }
 
 
 # For Testing, subset leagues
 
-mfl_leagues <- mfl_leagues |>
-  slice_head(n=25)
+
 
 
 
