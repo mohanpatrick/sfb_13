@@ -92,7 +92,16 @@ fwrite(mfl_drafts,"draft_picks_mfl.csv",quote = TRUE)
 update_time <- format(Sys.time(), tz = "America/Toronto", usetz = TRUE)
 writeLines(update_time, "timestamp.txt")
 
+pb_upload("draft_picks_mfl.csv",
+          repo = "mohanpatrick/sfb_13",
+          tag = "data_mfl")
+cli::cli_alert_success("Successfully uploaded to Git")
 
+
+pb_upload("divisions_mfl.csv",
+          r repo = "mohanpatrick/sfb_13",
+          tag = "data_mfl")
+cli::cli_alert_success("Successfully uploaded to Git")
 
 
 cli::cli_alert_success("Successfully got all picks and ADP!")
