@@ -63,7 +63,7 @@ mfl_drafts <- mfl_drafts |>
   mutate(
     player_id = as.character(player_id)
   ) |>
-  group_by(league_id, division) |>
+  group_by(league_id) |> # Note removed division here
   mutate(
         timestamp = as.POSIXct(timestamp, origin= "1970-01-01"),
         time_to_pick_int = interval(lag(timestamp), timestamp),
