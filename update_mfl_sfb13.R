@@ -98,7 +98,7 @@ cli::cli_alert_success("Successfully uploaded to Git")
 
 
 pb_upload("divisions_mfl.csv",
-          r repo = "mohanpatrick/sfb_13",
+          repo = "mohanpatrick/sfb_13",
           tag = "data_mfl")
 cli::cli_alert_success("Successfully uploaded to Git")
 
