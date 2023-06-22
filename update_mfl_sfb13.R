@@ -48,9 +48,10 @@ mfl_drafts <- mfl_leagues |>
 
 # We add divisions here which is probably the unit of focus for draft dashboard for MFL. Sleeper seems to lack divisionsm but maybe an
 # artifact of all being live last year?
-divisions <- mfl_drafts |>
-  select(league_id, division_name) |>
-  distinct()
+# ok, no divisions yet?
+#divisions <- mfl_drafts |>
+#  select(league_id, division_name) |>
+#  distinct()
 
 
 
@@ -74,19 +75,10 @@ mfl_drafts <- mfl_drafts |>
 # For testing only
 
 
-# Add common player_ids to get combined ADP
-master_player_ids <- dp_playerids() |>
-  select(mfl_id, sleeper_id, name, merge_name) |>
-  mutate(
-    cross_mfl_sleep_id = paste0(mfl_id, "-", sleeper_id)
-  )
-
-mfl_drafts <- mfl_drafts |>
-  left_join(master_player_ids, by=c("player_id" = "mfl_id"))
 
 
 
-fwrite(divisions, "divisions_mfl.csv", quote = TRUE)
+#fwrite(divisions, "divisions_mfl.csv", quote = TRUE)
 fwrite(mfl_drafts,"draft_picks_mfl.csv",quote = TRUE)
 update_time <- format(Sys.time(), tz = "America/Toronto", usetz = TRUE)
 writeLines(update_time, "timestamp.txt")
@@ -97,10 +89,10 @@ pb_upload("draft_picks_mfl.csv",
 cli::cli_alert_success("Successfully uploaded to Git")
 
 
-pb_upload("divisions_mfl.csv",
-          repo = "mohanpatrick/sfb_13",
-          tag = "data_mfl")
-cli::cli_alert_success("Successfully uploaded to Git")
+#pb_upload("divisions_mfl.csv",
+#          repo = "mohanpatrick/sfb_13",
+#          tag = "data_mfl")
+#cli::cli_alert_success("Successfully uploaded to Git")
 
 
 cli::cli_alert_success("Successfully got all picks and ADP!")
