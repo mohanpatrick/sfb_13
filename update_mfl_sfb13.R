@@ -89,6 +89,12 @@ pb_upload("draft_picks_mfl.csv",
 cli::cli_alert_success("Successfully uploaded to Git")
 
 
+pb_upload("mfl_league_ids.csv",
+          repo = "mohanpatrick/sfb_13",
+          tag = "data_mfl")
+cli::cli_alert_success("Successfully uploaded to Git")
+
+
 #pb_upload("divisions_mfl.csv",
 #          repo = "mohanpatrick/sfb_13",
 #          tag = "data_mfl")
