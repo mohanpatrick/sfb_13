@@ -19,4 +19,7 @@ Imports:
     purrr (>= 1.0.0),
     stringr,
     piggyback,
-    readr 
+    readr,
+    httr2,
+    jsonlite,
+    lubridate
