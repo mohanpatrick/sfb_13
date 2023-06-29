@@ -21,7 +21,9 @@ options(dplyr.summarise.inform = FALSE,
    tidyr::unnest_wider(1) |>
    select( league_name = name, league_id = id,league_home = homeURL) |>
    # Going to need some stricter filtering patterns, but for now we take out obvious not real ones
-    filter(!grepl("Mock|Template|Sattelite", league_name))
+    filter(!grepl("Mock|Template|Sattelite", league_name))|>
+    filter(league_id != "57652")
+# Add filter for 57652 the stray miller liter
 
 
 
