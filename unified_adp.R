@@ -45,7 +45,7 @@ n_mfl_picks <- nrow(draft_picks_mfl)
 if (n_sleeper_picks == "0" & n_mfl_picks == "0") {
 
   cli::cli_progress_message("No picks in either data set. Exiting script")
-  stop("leaving")
+  quit(status = 0)
 }
 
 cli::cli_progress_message("Woo-hoo picks found! Calculating ADP")
