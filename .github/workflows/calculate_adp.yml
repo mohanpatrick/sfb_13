@@ -1,6 +1,6 @@
 on:
   schedule:
-     - cron: "0 23 * * *"
+     - cron: "45 0 * * *"
   workflow_dispatch:
   
 name: calc_adp
