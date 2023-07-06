@@ -16,7 +16,7 @@ options(dplyr.summarise.inform = FALSE,
 #GITHUB_PAT <- Sys.setenv("GITHUB_PAT")
 #Sys.setenv("MFL_CLIENT")
 mfl_client <- Sys.getenv(c("MFL_CLIENT"))
-cli::cli_alert("Client ID: {MFL_CLIENT}")
+cli::cli_alert("Client ID: {mfl_client}")
 
  mfl_leagues <- mfl_getendpoint(mfl_connect(2022),"leagueSearch", user_agent="MFLRCLIENT", SEARCH="#SFB12") |>
    purrr::pluck("content","leagues","league") |>
