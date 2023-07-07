@@ -1,7 +1,8 @@
 on:
+  workflow_dispatch:
   schedule:
      - cron: "15,45 15-22 * * *"
-  workflow_dispatch:
+  
   
 name: update_drafts
 
