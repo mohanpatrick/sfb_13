@@ -35,7 +35,7 @@ fwrite(sleeper_leagues,"league_ids_sleeper.csv")
 get_sleeper_draft <- function(league_id){
   cli::cli_alert("League ID: {league_id}")
   Sys.sleep(1)
-  conn <- sleeper_connect(2023, league_id, rate_limit = F)
+  conn <- sleeper_connect(search_year , league_id, rate_limit = F)
   suppressWarnings(ff_draft(conn))
 }
 
@@ -106,15 +106,17 @@ sleeper_current_picks <- sleeper_drafts |>
   summarize(
     last_pick = max(overall)
   ) |>
-  mutate(otc = last_pick +1)
+  mutate(otc = last_pick +1,
+         league_id = as.double(league_id))
 
 
 sleeper_draft_metadata <- sleeper_draft_metadata |>
   mutate(
-      league_id = as.double(league_id),
+  
       start_time_dt = as.POSIXct(as.numeric(start_time), origin = "1970-01-01"),
         last_picked_dt = as_datetime(as.numeric(last_picked),tz = "America/New_York"),
-      league_url = paste0("https://sleeper.com/leagues/", league_id, sep="")
+      league_url = paste0("https://sleeper.com/leagues/", league_id, sep=""),
+      league_id = as.double(league_id)
   ) |>
   left_join(sleeper_current_picks)
 
@@ -136,6 +138,8 @@ write_csv(sleeper_leagues, "league_ids_sleeper.csv")
 
 
 # Need to bring in all player_ids so we can add MFL ids here
+
+
 
 pb_upload("draft_metadata_sleeper.csv",
           repo = "mohanpatrick/sfb_13",
