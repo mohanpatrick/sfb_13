@@ -109,7 +109,9 @@ sleeper_only_adp <- sleeper_for_adp |>
 
 
 
+#sleeper has picks, so modify so it doesn't barf until MFL does
 
+if(n_mfl_picks >0 ){
 # Need to retain mfl id for my app
 comb_adp <- mfl_for_adp |>
   union_all(sleeper_for_adp) |>
@@ -129,6 +131,10 @@ comb_adp <- mfl_for_adp |>
   ) |>
   ungroup() |>
   arrange(overall_avg,-n)
+}else{
+  comb_adp <- sleeper_only_adp
+  
+}
 
 # Add back mfl id for app
 write_csv(mfl_only_adp, "mfl_only_adp.csv")
