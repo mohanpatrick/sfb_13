@@ -28,7 +28,7 @@ sleeper_leagues <- sleeper_userleagues("ScottFishBowl", search_year) |>
   #select(league_id, league_name) |>
   filter(str_detect(league_name,sfb_sleeper_string)) |>
   mutate(league_id = as.character(league_id)) |>
-  filter(!grepl("Satellite", league_name))
+  filter(!grepl("Satellite|Mirror", league_name))
 
 fwrite(sleeper_leagues,"league_ids_sleeper.csv")
 
