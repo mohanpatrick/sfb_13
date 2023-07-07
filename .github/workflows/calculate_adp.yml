@@ -1,7 +1,8 @@
 on:
+  workflow_dispatch:
   schedule:
      - cron: "20,40 * * * *"
-  workflow_dispatch:
+  
   
 name: calc_adp
 
