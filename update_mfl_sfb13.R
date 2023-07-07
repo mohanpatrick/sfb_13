@@ -37,7 +37,7 @@ cli::cli_alert("Client ID: {mfl_client}")
 get_mfl_draft <- function(league_id){
   cli::cli_alert("League ID: {league_id}")
   cli::cli_alert("Now we sleep to not piss off MFL")
-  Sys.sleep(1)
+  Sys.sleep(3)
   conn <- mfl_connect(2023, league_id, user_agent = "MFLRCLIENT", rate_limit = TRUE, rate_limit_number = 30, rate_limit_seconds = 60)
   ff_draft(conn)
 }
@@ -46,6 +46,7 @@ get_mfl_draft <- function(league_id){
 # For Testing, subset leagues
 
 
+#28764 is London live. Only MFL presumably until Monday
 
 
 
