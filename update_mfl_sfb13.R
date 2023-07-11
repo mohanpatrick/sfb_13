@@ -80,9 +80,16 @@ mfl_drafts <- mfl_drafts |>
 
 # May have to group first? or Do it separately unless we can group within lag()
 
-# For testing only
+# Check for completed
 
+completed <- draft_picks_mfl |>
+  filter(!is.na(timestamp))|>
+  group_by(league_name,league_id, league_home) |>
+  summarise(last_pick = max(overall, na.rm=TRUE))|>
+  filter(last_pick == 264)|>
+  select(-last_pick)
 
+fwrite(completed, "completed_leagues.csv")
 
 
 
@@ -103,11 +110,10 @@ pb_upload("mfl_league_ids.csv",
 cli::cli_alert_success("Successfully uploaded to Git")
 
 
-#pb_upload("divisions_mfl.csv",
-#          repo = "mohanpatrick/sfb_13",
-#          tag = "data_mfl")
-#cli::cli_alert_success("Successfully uploaded to Git")
-
+pb_upload("completed_leagues.csv",
+          repo = "mohanpatrick/sfb_13",
+          tag = "data_mfl")
+cli::cli_alert_success("Successfully uploaded to Git")
 
 cli::cli_alert_success("Successfully got all picks and ADP!")
 
