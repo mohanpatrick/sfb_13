@@ -29,6 +29,10 @@ cli::cli_alert("Client ID: {mfl_client}")
 # Add filter for 57652 the stray miller liter
 
 
+completed_leagues <- read_csv("https://github.com/mohanpatrick/sfb_13/releases/download/data_mfl/completed_leagues.csv")
+
+mfl_leagues <- mfl_leagues |>
+  minus(completed_leagues)
 
 
  fwrite(mfl_leagues,"mfl_league_ids.csv",quote = TRUE)
