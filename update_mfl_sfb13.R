@@ -82,7 +82,7 @@ mfl_drafts <- mfl_drafts |>
 
 # Check for completed
 
-completed <- draft_picks_mfl |>
+completed <- mfl_drafts |>
   filter(!is.na(timestamp))|>
   group_by(league_name,league_id, league_home) |>
   summarise(last_pick = max(overall, na.rm=TRUE))|>
