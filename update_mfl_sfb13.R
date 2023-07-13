@@ -111,7 +111,10 @@ completed <- mfl_drafts |>
 
 write_csv(completed, "completed_leagues.csv", append = TRUE)
 
+completed_drafts <- completed |>
+  left_join(mfl_drafts)
 
+write_csv(completed_drafts, "completed_mfl_drafts.csv", append = TRUE)
 
 #fwrite(divisions, "divisions_mfl.csv", quote = TRUE)
 fwrite(mfl_drafts,"draft_picks_mfl.csv",quote = TRUE)
@@ -131,6 +134,11 @@ cli::cli_alert_success("Successfully uploaded to Git")
 
 
 pb_upload("completed_leagues.csv",
+          repo = "mohanpatrick/sfb_13",
+          tag = "data_mfl")
+cli::cli_alert_success("Successfully uploaded to Git")
+
+pb_upload("completed_mfl_drafts.csv",
           repo = "mohanpatrick/sfb_13",
           tag = "data_mfl")
 cli::cli_alert_success("Successfully uploaded to Git")
