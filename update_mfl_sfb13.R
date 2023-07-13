@@ -30,13 +30,14 @@ cli::cli_alert("Client ID: {mfl_client}")
 # Add filter for 57652 the stray miller liter
 
 
-completed_leagues <- read_csv("https://github.com/mohanpatrick/sfb_13/releases/download/data_mfl/completed_leagues.csv")|>
-  mutate(league_id = as.character(league_id))
+prior_completed_leagues <- read_csv("https://github.com/mohanpatrick/sfb_13/releases/download/data_mfl/completed_leagues.csv")|>
+  mutate(league_id = as.character(league_id))|>
+  select(league_id)
 
 
 
-#mfl_leagues <- mfl_leagues |>
-# anti_join(completed_leagues)
+mfl_leagues <- mfl_leagues |>
+anti_join(prior_completed_leagues)
 
 
  fwrite(mfl_leagues,"mfl_league_ids.csv",quote = TRUE)
@@ -74,6 +75,17 @@ mfl_drafts <- mfl_leagues |>
 #pb_upload("draft_picks_mfl.csv", repo = "dynastyprocess/data-sfb12", tag = "data-mfl")
 #pb_upload("timestamp.txt", repo = "dynastyprocess/data-sfb12", tag = "data-mfl")
 
+
+
+
+
+
+
+
+
+
+
+
 # Add interval between picks
 mfl_drafts <- mfl_drafts |>
   mutate(
@@ -95,9 +107,9 @@ completed <- mfl_drafts |>
   group_by(league_name,league_id, league_home) |>
   summarise(last_pick = max(overall, na.rm=TRUE))|>
   filter(last_pick == 264)|>
-  select(-last_pick)
+  select(-last_pick, -league_name)
 
-fwrite(completed, "completed_leagues.csv")
+write_csv(completed, "completed_leagues.csv", append = TRUE)
 
 
 
