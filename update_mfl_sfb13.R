@@ -35,8 +35,8 @@ completed_leagues <- read_csv("https://github.com/mohanpatrick/sfb_13/releases/d
 
 
 
-mfl_leagues <- mfl_leagues |>
- anti_join(completed_leagues)
+#mfl_leagues <- mfl_leagues |>
+# anti_join(completed_leagues)
 
 
  fwrite(mfl_leagues,"mfl_league_ids.csv",quote = TRUE)
