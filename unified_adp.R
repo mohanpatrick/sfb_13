@@ -31,7 +31,7 @@ draft_picks_mfl <- read_csv("draft_picks_mfl.csv") |>
 
 master_player_ids <- dp_playerids() |>
   select(mfl_id, sleeper_id, name, merge_name, position, team) |>
-  filter(position %in% c("QB","WR", "TE", "RB", "K", "PK")) |>
+  filter(position %in% c("QB","WR", "TE", "RB", "K", "PK", "FB")) |>
   mutate(
     cross_mfl_sleep_id = paste0(mfl_id, "-", sleeper_id),
     sleeper_id = as.double(sleeper_id),
@@ -52,6 +52,7 @@ cli::cli_progress_message("Woo-hoo picks found! Calculating ADP")
 
 # Join back for sleeper, mfl, skip for now as they are there on file. maybe add back to gather?
 draft_picks_sleeper <- draft_picks_sleeper |>
+  mutate(pos = ifelse(pos == "K", "PK", pos))|>
   left_join(master_player_ids, by=c("player_id" = "sleeper_id", "pos" = "position"))
 
 draft_picks_mfl <- draft_picks_mfl |>
