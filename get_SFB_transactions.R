@@ -10,8 +10,6 @@ library(piggyback)
 library(cli)
 library(readr)
 library(lubridate)
-library(gt)
-library(gtExtras)
 library(piggyback)
 
 
