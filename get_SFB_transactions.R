@@ -79,10 +79,10 @@ sleeper_leagues <- sleeper_userleagues("ScottFishBowl", search_year) |>
 
 #### DELETE AFTER TESTING: This grabs 20 leagues from each so run will be shorter and less likely to be aborted by MFL
 
-sleeper_leagues <- sleeper_leagues |>
-  slice_head(n=20)
-mfl_leagues <- mfl_leagues |>
-  slice_head(n=20)
+#sleeper_leagues <- sleeper_leagues |>
+#  slice_head(n=20)
+#mfl_leagues <- mfl_leagues |>
+#  slice_head(n=20)
 
 write_csv(sleeper_leagues, "sleeper_sfb_leagues.csv")
 write_csv(mfl_leagues, "mfl_sfb_leagues.csv")
