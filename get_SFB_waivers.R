@@ -11,6 +11,8 @@ library(cli)
 library(readr)
 library(lubridate)
 library(piggyback)
+library(gt)
+library(gtExtras)
 
 
 options(dplyr.summarise.inform = FALSE,
