@@ -113,7 +113,7 @@ master_player_ids <- dp_playerids() |>
 
 # Get display names and headshot URLs for players
 players <- load_players()|>
-  filter( status == "ACT" & position %in% c("QB","WR", "TE", "RB", "K", "PK", "FB"))|>
+  filter( status != "RET" & position %in% c("QB","WR", "TE", "RB", "K", "PK", "FB"))|>
   select(display_name, first_name, last_name, gsis_id, position, headshot)|>
   mutate(
     merge_name = dp_cleannames(display_name,
