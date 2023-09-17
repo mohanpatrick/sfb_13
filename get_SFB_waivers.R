@@ -19,8 +19,8 @@ options(dplyr.summarise.inform = FALSE,
         piggyback.verbose = FALSE)
 
 #For testing
-waiver_date = "2023-09-13"
-#waiver_date = today()
+#waiver_date = "2023-09-13"
+waiver_date = today()
 
 
 all_transactions <- read_csv("https://github.com/mohanpatrick/sfb_13/releases/download/data_mfl/sfb_all_transactions.csv")
