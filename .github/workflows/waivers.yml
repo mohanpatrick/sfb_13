@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: "0 16 * * 3"
+  
+  
+name: get_waivers
+
+jobs:
+  sfb_waivers:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.REPO_PAT }}
+      MFL_CLIENT: ${{ secrets.MFL_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: ffscrapr, data.table, nflverse, stringr, lubridate, piggyback, readr, dplyr, tidyr, tidyverse, purrr, cli
+        name: Run data update
+      - run: |
+          source("get_SFB_waivers.R")
+        shell: Rscript {0}
+        
+        
