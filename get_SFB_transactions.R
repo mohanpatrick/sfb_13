@@ -109,7 +109,8 @@ master_player_ids <- dp_playerids() |>
     sleeper_id = sleeper_id,
     mfl_id = mfl_id,
     clean_team = team
-  )
+  )|>
+  filter(mfl_id != 	11600)
 
 # Get display names and headshot URLs for players
 players <- load_players()|>
