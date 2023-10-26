@@ -141,7 +141,7 @@ sleep_trans_sum <- sleeper_transactions |>
 
 mfl_trans_sum <- mfl_transactions |>
   mutate(tran_date = as.Date(timestamp))  |>
-  filter(type == "BBID_WAIVER")|>
+  #filter(type == "BBID_WAIVER")|>
   left_join(master_player_ids, by=c("player_id" = "mfl_id"))|>
   select(cross_mfl_sleep_id,player_id, name, tran_date, pos, type_desc, bbid_spent, headshot, type)|>
   mutate(mfl_id = player_id)|>
