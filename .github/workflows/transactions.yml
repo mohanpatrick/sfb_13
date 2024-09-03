@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
- # schedule:
- #    - cron: "15 18 * * *"
+  schedule:
+     - cron: "15 18 * * *"
   
   
 name: get_transactions
