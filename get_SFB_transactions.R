@@ -18,8 +18,8 @@ options(dplyr.summarise.inform = FALSE,
 
 
 
-search_year = "2023"
-sfb_sleeper_string = "\\#SFB13"
+search_year = "2024"
+sfb_sleeper_string = "\\#SFB14"
 rundate = today()
 
 get_mfl_transactions <- function(league_id){
@@ -56,7 +56,7 @@ mfl_client <- Sys.getenv(c("MFL_CLIENT"))
 cli::cli_alert("Client ID: {mfl_client}")
 
 cli::cli_alert("Getting MFL League Ids")
-mfl_leagues <- mfl_getendpoint(mfl_connect(search_year),"leagueSearch", user_agent=mfl_client, SEARCH="#SFB13") |>
+mfl_leagues <- mfl_getendpoint(mfl_connect(search_year),"leagueSearch", user_agent=mfl_client, SEARCH="#SFB14") |>
   purrr::pluck("content","leagues","league") |>
   tibble::tibble() |>
   tidyr::unnest_wider(1) |>
@@ -99,6 +99,26 @@ cli::cli_alert("Getting MFL transactions")
 mfl_transactions <- mfl_leagues |>
   mutate(transactions = map(league_id, possibly(get_mfl_transactions, otherwise = tibble()))) |>
   unnest(transactions)
+
+
+if (!"bbid_amount" %in% colnames(mfl_transactions)) {
+  # If it doesn't exist, add the column with NA values
+  mfl_transactions <- mfl_transactions %>%
+    mutate(bbid_amount = NA)
+}
+
+
+if (!"bbid_amount" %in% colnames(sleeper_transactions)) {
+  # If it doesn't exist, add the column with NA values
+  sleeper_transactions <- sleeper_transactions %>%
+    mutate(bbid_amount= NA)
+}
+
+
+
+
+
+
 
 # Load player ids, we do this to find ff ids and allow merge of Sleeper/MFL
 master_player_ids <- dp_playerids() |>
