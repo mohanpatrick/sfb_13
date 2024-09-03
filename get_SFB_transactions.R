@@ -25,7 +25,7 @@ rundate = today()
 get_mfl_transactions <- function(league_id){
   cli::cli_alert("League ID: {league_id}")
   cli::cli_alert("Now we sleep to not piss off MFL")
-  Sys.sleep(2)
+  Sys.sleep(3)
   conn <- mfl_connect(search_year, league_id, user_agent = "MFLRCLIENT", rate_limit = TRUE, rate_limit_number = 30, rate_limit_seconds = 60)
   ff_transactions(conn)
 }
@@ -40,7 +40,7 @@ get_sleeper_transactions <- function(league_id){
 get_mfl_rosters <- function(league_id){
   cli::cli_alert("League ID: {league_id}")
   cli::cli_alert("Now we sleep to not piss off MFL")
-  Sys.sleep(2)
+  Sys.sleep(3)
   conn <- mfl_connect(search_year, league_id, user_agent = "MFLRCLIENT", rate_limit = TRUE, rate_limit_number = 30, rate_limit_seconds = 60)
   ff_rosters(conn)
 }
@@ -103,14 +103,14 @@ mfl_transactions <- mfl_leagues |>
 
 if (!"bbid_amount" %in% colnames(mfl_transactions)) {
   # If it doesn't exist, add the column with NA values
-  mfl_transactions <- mfl_transactions %>%
+  mfl_transactions <- mfl_transactions |>
     mutate(bbid_amount = NA)
 }
 
 
 if (!"bbid_amount" %in% colnames(sleeper_transactions)) {
   # If it doesn't exist, add the column with NA values
-  sleeper_transactions <- sleeper_transactions %>%
+  sleeper_transactions <- sleeper_transactions |>
     mutate(bbid_amount= NA)
 }
 
