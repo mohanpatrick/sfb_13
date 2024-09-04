@@ -62,7 +62,7 @@ top_adds_table <- current_waivers|>
     mean_bbid = "Avg. Bid"
   ) |>
   tab_header(
-    title = md("#SFB13 Top 20 Waiver Adds"),
+    title = md("#SFB14 Top 20 Waiver Adds"),
     subtitle = md("Includes MFL and Sleeper Waiver Runs. Not free agent transactions")
   ) |>
   #gt_hulk_col_numeric(num_over) |>
@@ -90,7 +90,7 @@ top_drops_table <- current_waivers|>
     drops = "Drops"
   ) |>
   tab_header(
-    title = md("#SFB13 Top 20 Waiver Drops"),
+    title = md("#SFB14 Top 20 Waiver Drops"),
     subtitle = md("Includes MFL and Sleeper Waiver Runs. Not free agent transactions")
   ) |>
   #gt_hulk_col_numeric(num_over) |>
@@ -119,7 +119,7 @@ top_spend_table <- current_waivers|>
     mean_bbid = "Avg. Bid"
   ) |>
   tab_header(
-    title = md("#SFB13Waivers Top 15 Highest Avg $ Spend"),
+    title = md("#SFB14 Waivers Top 15 Highest Avg $ Spend"),
     subtitle = md("Includes MFL and Sleeper Waiver Runs. Not free agent transactions")
   ) |>
   #gt_hulk_col_numeric(num_over) |>
