@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   schedule:
-     - cron: "0 18 * * 3"
+     - cron: "30 18 * * 3"
   
   
 name: get_waivers
