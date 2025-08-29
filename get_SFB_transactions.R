@@ -18,8 +18,8 @@ options(dplyr.summarise.inform = FALSE,
 
 
 
-search_year = "2024"
-sfb_sleeper_string = "\\#SFB14"
+search_year = "2025"
+sfb_sleeper_string = "\\#SFB15"
 rundate = today()
 
 get_mfl_transactions <- function(league_id){
@@ -56,7 +56,7 @@ mfl_client <- Sys.getenv(c("MFL_CLIENT"))
 cli::cli_alert("Client ID: {mfl_client}")
 
 cli::cli_alert("Getting MFL League Ids")
-mfl_leagues <- mfl_getendpoint(mfl_connect(search_year),"leagueSearch", user_agent=mfl_client, SEARCH="#SFB14") |>
+mfl_leagues <- mfl_getendpoint(mfl_connect(search_year),"leagueSearch", user_agent=mfl_client, SEARCH="#SFB15") |>
   purrr::pluck("content","leagues","league") |>
   tibble::tibble() |>
   tidyr::unnest_wider(1) |>
@@ -163,13 +163,13 @@ mfl_trans_sum <- mfl_transactions |>
   mutate(tran_date = as.Date(timestamp))  |>
   #filter(type == "BBID_WAIVER")|>
   left_join(master_player_ids, by=c("player_id" = "mfl_id"))|>
-  select(cross_mfl_sleep_id,player_id, name, tran_date, pos, type_desc, bbid_spent, headshot, type)|>
+  select(cross_mfl_sleep_id,player_id, name, tran_date, pos, type_desc, bbid_amount, headshot, type)|>
   mutate(mfl_id = player_id)|>
   select(-player_id)
 
 # Merge transaction sets
 all_transactions <- bind_rows(mfl_trans_sum, sleep_trans_sum)|>
-mutate(bbid_spent =ifelse(!is.na(bbid_spent), bbid_spent,0))
+  mutate(bbid_spent =ifelse(!is.na(bbid_spent), bbid_spent,0))
 
 write_csv(all_transactions, "sfb_all_transactions.csv")
 write_csv(as_tibble(rundate), "date_run.csv")
@@ -184,4 +184,3 @@ pb_upload("date_run.csv",
           repo = "mohanpatrick/sfb_13",
           tag = "data_mfl")
 cli::cli_alert_success("Successfully uploaded run date to Git")
-
